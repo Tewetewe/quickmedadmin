@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgPrimary"
+    tools:context=".KonsultasiActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:background="@drawable/bg_gradient_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/mregular"
+                android:lineSpacingExtra="9dp"
+                android:text="Konsultasi"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/btn_back"
+                android:layout_width="90dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="21dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_back_black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_layout_white"
+                android:orientation="vertical"
+                android:paddingLeft="24dp"
+                android:paddingTop="15dp"
+                android:paddingRight="24dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/mregular"
+                        android:textAlignment="center"
+                        android:text="Lengan Kanan Terasa Sakit"
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#EDEDED" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view4"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/bg_view_circle_picture"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/icon_nopic"
+                            app:layout_constraintBottom_toBottomOf="@+id/view4"
+                            app:layout_constraintEnd_toEndOf="@+id/view4"
+                            app:layout_constraintStart_toStartOf="@+id/view4"
+                            app:layout_constraintTop_toTopOf="@+id/view4" />
+
+                        <com.github.florent37.shapeofview.shapes.CircleView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/view4"
+                            app:layout_constraintEnd_toEndOf="@+id/view4"
+                            app:layout_constraintStart_toStartOf="@+id/view4"
+                            app:layout_constraintTop_toTopOf="@+id/view4">
+
+                            <ImageView
+                                android:id="@+id/pic_foto_register"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp" />
+
+                        </com.github.florent37.shapeofview.shapes.CircleView>
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
+                            android:fontFamily="@font/mregular"
+                            android:paddingBottom="5dp"
+                            android:text="Kamal"
+                            android:textColor="@color/blackPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toStartOf="@+id/view4"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.github.florent37.shapeofview.shapes.BubbleView
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            app:layout_constraintEnd_toStartOf="@+id/view4"
+                            app:layout_constraintHorizontal_bias="0.457"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8"
+                            app:shape_bubble_arrowHeight="10dp"
+                            app:shape_bubble_arrowPosition="right"
+                            app:shape_bubble_arrowWidth="10dp"
+                            app:shape_bubble_borderRadius="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:width="220dp"
+                                android:background="@color/gradientgreen"
+                                android:fontFamily="@font/mlight"
+                                android:paddingStart="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingEnd="20dp"
+                                android:paddingBottom="5dp"
+                                android:text="Selamat Siang Dokter Saya Kamal mau bertanya, lengan kanan saya terasa sakit saat berolahraga"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/grayPrimary"
+                                android:textSize="12sp" />
+
+                        </com.github.florent37.shapeofview.shapes.BubbleView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view5"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/bg_view_circle_picture"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/icon_nopic"
+                            app:layout_constraintBottom_toBottomOf="@+id/view5"
+                            app:layout_constraintEnd_toEndOf="@+id/view5"
+                            app:layout_constraintStart_toStartOf="@+id/view5"
+                            app:layout_constraintTop_toTopOf="@+id/view5" />
+
+                        <com.github.florent37.shapeofview.shapes.CircleView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/view5"
+                            app:layout_constraintEnd_toEndOf="@+id/view5"
+                            app:layout_constraintStart_toStartOf="@+id/view5"
+                            app:layout_constraintTop_toTopOf="@+id/view5">
+
+                            <ImageView
+                                android:id="@+id/pic_foto_register2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp" />
+
+                        </com.github.florent37.shapeofview.shapes.CircleView>
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:fontFamily="@font/mregular"
+                            android:paddingBottom="5dp"
+                            android:text="Dokter"
+                            android:textColor="@color/blackPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toEndOf="@+id/view5"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.github.florent37.shapeofview.shapes.BubbleView
+                            android:id="@+id/bubbleView"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view5"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9"
+                            app:shape_bubble_arrowHeight="10dp"
+                            app:shape_bubble_arrowPosition="left"
+                            app:shape_bubble_arrowWidth="10dp"
+                            app:shape_bubble_borderRadius="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:width="220dp"
+                                android:background="@color/gradientgreen"
+                                android:fontFamily="@font/mlight"
+                                android:paddingStart="20dp"
+                                android:paddingTop="5dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="5dp"
+                                android:text="Selamat Siang Kamal, Lakukan pijatan berulang kali pada bagian yang terasa sakit"
+                                android:textColor="@color/grayPrimary"
+                                android:textSize="12sp" />
+
+                        </com.github.florent37.shapeofview.shapes.BubbleView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_layout_white"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:hint="Text here"
+                android:background="@drawable/bg_input_edit"
+                android:fontFamily="@font/mmedium"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingLeft="12dp"
+                android:textColor="@color/blackPrimary" />
+
+            <ImageView
+                android:id="@+id/send"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_send"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

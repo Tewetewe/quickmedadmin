@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuickMedAdmin</string>
+    <string name="signin">Sign In</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="email_label">Email Address</string>
+    <string name="name_label">Name</string>
+    <string name="bio_label">Bio</string>
+    <string name="explore">Explore Now</string>
+    <string name="title_activity_button_navigation">ButtonNavigationAct</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+</resources>
