@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.adminquickmed">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".app.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -14,8 +14,10 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ArticleActivity"/>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".UploadImageActivity"></activity>
+        <activity android:name=".ArticleActivity" />
         <activity android:name=".NotifActivity" />
         <activity android:name=".KonsultasiActivity" />
         <activity android:name=".AntrianActivity" />

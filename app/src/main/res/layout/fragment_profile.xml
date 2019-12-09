@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/mlight"
             android:textAlignment="center"
-            android:text="Member"
+            android:text="Dokter"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mregular"
-                android:text="Nama"
+                android:text="Username"
                 android:textColor="@color/blackPrimary"
                 android:textSize="20sp" />
 
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/mlight"
-                android:text="Gusdek Lingga"
+                android:id="@+id/tv_username"
                 android:textColor="@color/grayPrimary"
                 android:textSize="16sp" />
 
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mregular"
-                android:text="Nama"
+                android:text="User ID"
                 android:textColor="@color/blackPrimary"
                 android:textSize="20sp" />
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/mlight"
-                android:text="Gusdek Lingga"
+                android:id="@+id/tv_userid"
                 android:textColor="@color/grayPrimary"
                 android:textSize="16sp" />
 

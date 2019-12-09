@@ -58,7 +58,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     SharedPreferences sharedpreferences;
     Boolean session = false;
-    String user_id, username;
+    String user_id, username, password;
     public static final String my_shared_preferences = "my_shared_preferences";
     public static final String session_status = "session_status";
     public LoginFragment() {
@@ -147,7 +147,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // Check for error node in json
                     if (success == 1) {
                         String username = jObj.getString(TAG_USERNAME);
-                        String id = jObj.getString(TAG_ID);
+                        String user_id = jObj.getString(TAG_ID);
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -162,7 +162,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                         // Memanggil main activity
                         Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.putExtra(TAG_ID, id);
+                        intent.putExtra(TAG_ID, user_id);
                         intent.putExtra(TAG_USERNAME, username);
                         startActivity(intent);
                     } else {
