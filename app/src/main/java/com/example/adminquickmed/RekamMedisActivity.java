@@ -1,18 +1,12 @@
 package com.example.adminquickmed;
 
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -38,53 +34,48 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.app.Activity.RESULT_OK;
+public class RekamMedisActivity extends AppCompatActivity {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class UploadImageFragment extends Fragment {
     Button buttonChoose;
     FloatingActionButton buttonUpload;
     Toolbar toolbar;
     ImageView imageView;
-    EditText txt_name;
+    EditText txt_diagnosa, txt_anjuran;
     Bitmap bitmap, decoded;
     int success;
     int PICK_IMAGE_REQUEST = 1;
     int bitmap_size = 60; // range 1 - 100
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = RekamMedisActivity.class.getSimpleName();
 
     /* 10.0.2.2 adalah IP Address localhost Emulator Android Studio. Ganti IP Address tersebut dengan
     IP Address Laptop jika di RUN di HP/Genymotion. HP/Genymotion dan Laptop harus 1 jaringan! */
-    private String UPLOAD_URL = "https://quickmedapi.000webhostapp.com/upload.php";
+    private String UPLOAD_URL = "https://quickmedapi.000webhostapp.com/uploadRekamMedis.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     private String KEY_IMAGE = "image";
-    private String KEY_NAME = "name";
+    private String KEY_DIAGNOSA = "diagnosa";
+    private String KEY_ANJURAN = "anjuran";
+
+
 
     String tag_json_obj = "json_obj_req";
-    public UploadImageFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_upload_image, container, false);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_rekam_medis);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        buttonChoose = (Button) rootView.findViewById(R.id.buttonChoose);
-        buttonUpload = (FloatingActionButton) rootView.findViewById(R.id.buttonUpload);
+        buttonChoose = (Button) findViewById(R.id.buttonChoose);
+        buttonUpload = (FloatingActionButton) findViewById(R.id.buttonUpload);
 
-        txt_name = (EditText) rootView.findViewById(R.id.editText);
+        txt_diagnosa = (EditText) findViewById(R.id.et_diagnosa);
+        txt_anjuran = (EditText) findViewById(R.id.et_anjuran);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
-        imageView = (ImageView) rootView.findViewById(R.id.imageView);
 
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +91,6 @@ public class UploadImageFragment extends Fragment {
                 uploadImage();
             }
         });
-        return rootView;
     }
 
     public String getStringImage(Bitmap bmp) {
@@ -113,7 +103,7 @@ public class UploadImageFragment extends Fragment {
 
     private void uploadImage() {
         //menampilkan progress dialog
-        final ProgressDialog loading = ProgressDialog.show(getActivity(), "Uploading...", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
             new Response.Listener<String>() {
                 @Override
@@ -127,12 +117,12 @@ public class UploadImageFragment extends Fragment {
                         if (success == 1) {
                             Log.e("v Add", jObj.toString());
 
-                            Toast.makeText(getActivity(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RekamMedisActivity.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
 
                             kosong();
 
                         } else {
-                            Toast.makeText(getActivity(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RekamMedisActivity.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -149,7 +139,7 @@ public class UploadImageFragment extends Fragment {
                     loading.dismiss();
 
                     //menampilkan toast
-                    Toast.makeText(getActivity(), error.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RekamMedisActivity.this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
                     Log.e(TAG, error.getMessage().toString());
                 }
             }) {
@@ -160,7 +150,8 @@ public class UploadImageFragment extends Fragment {
 
                 //menambah parameter yang di kirim ke web servis
                 params.put(KEY_IMAGE, getStringImage(decoded));
-                params.put(KEY_NAME, txt_name.getText().toString().trim());
+                params.put(KEY_DIAGNOSA, txt_diagnosa.getText().toString().trim());
+                params.put(KEY_ANJURAN, txt_anjuran.getText().toString().trim());
 
                 //kembali ke parameters
                 Log.e(TAG, "" + params);
@@ -170,6 +161,7 @@ public class UploadImageFragment extends Fragment {
 
         AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
     }
+
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -178,14 +170,14 @@ public class UploadImageFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             try {
                 //mengambil fambar dari Gallery
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 // 512 adalah resolusi tertinggi setelah image di resize, bisa di ganti.
                 setToImageView(getResizedBitmap(bitmap, 512));
             } catch (IOException e) {
@@ -196,7 +188,8 @@ public class UploadImageFragment extends Fragment {
 
     private void kosong() {
         imageView.setImageResource(0);
-        txt_name.setText(null);
+        txt_diagnosa.setText(null);
+        txt_anjuran.setText(null);
     }
 
     private void setToImageView(Bitmap bmp) {
@@ -225,8 +218,5 @@ public class UploadImageFragment extends Fragment {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    private void setSupportActionBar(Toolbar toolbar) {
-    }
 }
-
 

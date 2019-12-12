@@ -13,4 +13,9 @@
     <color name="gradientgreen">#4092FE9D</color>
     <color name="btnprimary">#74D5E9</color>
     <color name="greenprimary">#309BAF</color>
+    <color name="list_divider">#d9d9d9</color>
+    <color name="list_row_start_color">#ffffff</color>
+    <color name="list_row_end_color">#ffffff</color>
+    <color name="list_row_hover_start_color">#ebeef0</color>
+    <color name="list_row_hover_end_color">#ebeef0</color>
 </resources>

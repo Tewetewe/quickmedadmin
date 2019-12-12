@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.adminquickmed.ArticleActivity"
+    tools:showIn="@layout/activity_article"
+    android:background="@drawable/bg_gradient_primary">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/imageView" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Image"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="#FFF"
+        android:textSize="22sp"
+        android:id="@+id/buttonChoose"
+        android:drawableRight="@android:drawable/ic_menu_gallery"
+        android:background="@drawable/bg_btn_primary"/>
+
+    <LinearLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/mlight"
+            android:text="Judul Artikel"
+            android:textColor="@color/grayPrimary"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_judul"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:minLines="2"
+            android:gravity="top|left"
+            android:maxLines="4"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            android:background="@drawable/bg_input_edit"
+            android:fontFamily="@font/mmedium"
+            android:paddingLeft="12dp"
+            android:textColor="@color/blackPrimary"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/mlight"
+            android:text="Isi Artikel"
+            android:textColor="@color/grayPrimary"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_isi"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:minLines="6"
+            android:gravity="top|left"
+            android:maxLines="10"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            android:background="@drawable/bg_input_edit"
+            android:fontFamily="@font/mmedium"
+            android:paddingLeft="12dp"
+            android:textColor="@color/blackPrimary"/>
+
+    </LinearLayout>
+
+</LinearLayout>

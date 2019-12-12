@@ -28,11 +28,14 @@ public class EditProfileActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            if (getSupportFragmentManager().findFragmentById(android.R.id.content) == null) {
-                                                getSupportFragmentManager().beginTransaction()
-                                                    .add(android.R.id.content, new HomeFragment())
-                                                    .commit();
-                                            }
+                                            Intent myIntent = new Intent(EditProfileActivity.this, MainActivity.class);
+//                myIntent.putExtra("key", value); //Optional parameters
+                                            startActivity(myIntent);
+//                                            if (getSupportFragmentManager().findFragmentById(android.R.id.content) == null) {
+//                                                getSupportFragmentManager().beginTransaction()
+//                                                    .add(android.R.id.content, new HomeFragment())
+//                                                    .commit();
+//                                            }
                                         }
                                     });
 

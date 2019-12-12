@@ -5,4 +5,5 @@ public class Server {
     Ganti IP Address tersebut dengan IP Laptop Apabila di RUN di HP. HP dan Laptop harus 1 jaringan */
     public static final String URL = "https://quickmedapi.000webhostapp.com/";
 //    public static final String URL = "https://quickmedapi.herokuapp.com/";
+//public static final String URL = "https://192.168.43.163/android/quickmed";
 }

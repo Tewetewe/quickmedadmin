@@ -184,7 +184,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/icon_cek_antrian" />
+                            android:src="@drawable/icon_riwayat_kesehatan" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -223,7 +223,7 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/btn_konsultasi"
+                        android:id="@+id/btn_kelola_rekam_medis"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -315,14 +315,14 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/icon_riwayat_kesehatan" />
+                            android:src="@drawable/icon_cek_antrian" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/mregular"
-                            android:text="Kelola Poli"
+                            android:text="Kirim Berita"
                             android:textAlignment="center"
                             android:textColor="@color/blackPrimary"
                             android:textSize="16sp" />
