@@ -1,5 +1,7 @@
 package com.example.adminquickmed;
 
+
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -36,8 +38,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class AntrianActivity extends AppCompatActivity {
-    private static final String TAG = AntrianActivity.class.getSimpleName();
+public class OngoingFragment extends Fragment  {
+    private static final String TAG = OngoingFragment.class.getSimpleName();
     public static final String TAG_PENDAFTARAN_ID = "pendaftaran_id";
     public static final String TAG_USER_ID         = "user_id";
     public static final String TAG_NAMA_FASKES       = "nama_faskes";
@@ -62,18 +64,17 @@ public class AntrianActivity extends AppCompatActivity {
     int success;
     String tag_json_obj = "json_obj_req";
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_antrian);
-        pd = new ProgressDialog(AntrianActivity.this);
-        rvAntrian = (RecyclerView) findViewById(R.id.rv_antrian);
-        mManager = new LinearLayoutManager(AntrianActivity.this, LinearLayoutManager.VERTICAL, false);
-
-        mAdapter = new CardViewAntrianAdapter(getApplication(), antrianDataArrayList);
-        rvAntrian.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_ongoing, container, false);
+        pd = new ProgressDialog(getContext());
+        rvAntrian = (RecyclerView) rootView.findViewById(R.id.rv_antrian);
+        mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mAdapter = new CardViewAntrianAdapter((Application) getContext(), antrianDataArrayList);
+        rvAntrian.setLayoutManager(new LinearLayoutManager(getContext()));
         rvAntrian.setAdapter(mAdapter);
 
         loadjson();
+        return rootView;
     }
 
     private void loadjson(){
@@ -143,7 +144,7 @@ public class AntrianActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
 
                     } else {
-                        Toast.makeText(AntrianActivity.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -156,7 +157,7 @@ public class AntrianActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(AntrianActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }) {
 

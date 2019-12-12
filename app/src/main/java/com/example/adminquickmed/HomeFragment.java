@@ -73,10 +73,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Intent intent5 = new Intent(getActivity(), KonsultasiActivity.class);
                 startActivity(intent5);
                 break;
-            case R.id.btn_kelola_poli:
-                Intent intent6 = new Intent(getActivity(), SendNotifActivity.class);
-                startActivity(intent6);
-                break;
+//            case R.id.btn_kelola_poli:
+//                Intent intent6 = new Intent(getActivity(), SendNotifActivity.class);
+//                startActivity(intent6);
+//                break;
 
         }
 

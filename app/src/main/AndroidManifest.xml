@@ -25,7 +25,6 @@
         <activity android:name=".PasienActivity" />
         <activity android:name=".UploadImageActivity" />
         <activity android:name=".ArticleActivity" />
-        <activity android:name=".NotifActivity" />
         <activity android:name=".KonsultasiActivity" />
         <activity android:name=".AntrianActivity" />
         <activity android:name=".EditProfileActivity" />
