@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.example.adminquickmed.data.DataProfile;
 
 public class SignupChatActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth firebaseAuth;
@@ -55,16 +57,11 @@ public class SignupChatActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_chat);
-
-        //initialize UI elements
-        edtFirstName = findViewById(R.id.edtFirstName);
-        edtLastName = findViewById(R.id.edtLastName);
         edtUsername = findViewById(R.id.edtUsername);
         edtEmail = findViewById(R.id.edtEmail);
         edtpassword = findViewById(R.id.edtPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(this);
-        rdbGroup = findViewById(R.id.rdbGroup);
         actionBar = getSupportActionBar();
         progressDialog = new ProgressDialog(this);
 
@@ -82,28 +79,10 @@ public class SignupChatActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void signupUser() {
-        firstName = edtFirstName.getText().toString().trim();
-        lastName = edtLastName.getText().toString().trim();
         username = edtUsername.getText().toString().trim();
         email = edtEmail.getText().toString().trim();
         password = edtpassword.getText().toString().trim();
 
-        switch (rdbGroup.getCheckedRadioButtonId()) {
-            case R.id.rdbMale:
-                gender = "male";
-                break;
-            case R.id.rdbFemale:
-                gender = "female";
-                break;
-        }
-
-        if (TextUtils.isEmpty(firstName)) {
-            Toast.makeText(this,"Enter first name",Toast.LENGTH_LONG).show();
-            return;}
-
-        if (TextUtils.isEmpty(lastName)) {
-            Toast.makeText(this,"Enter last name",Toast.LENGTH_LONG).show();
-            return;}
 
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this,"Enter username",Toast.LENGTH_LONG).show();
@@ -115,10 +94,6 @@ public class SignupChatActivity extends AppCompatActivity implements View.OnClic
 
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(this,"Enter password",Toast.LENGTH_LONG).show();
-            return;}
-
-        if (TextUtils.isEmpty(gender)) {
-            Toast.makeText(this,"Select gender",Toast.LENGTH_LONG).show();
             return;}
 
         progressDialog.setMessage("Registering. Please Wait...");
@@ -152,11 +127,8 @@ public class SignupChatActivity extends AppCompatActivity implements View.OnClic
 
     public void addUserToDatabase(){
         HashMap<String, String> userData = new HashMap<>();
-        userData.put("a1_firstName", firstName);
-        userData.put("a2_lastname", lastName);
         userData.put("a3_username", username);
         userData.put("a4_email", email);
-        userData.put("a5_gender", gender);
         userData.put("a6_imageUrl", "none");
 
         Map<String, Object> update = new HashMap<>();

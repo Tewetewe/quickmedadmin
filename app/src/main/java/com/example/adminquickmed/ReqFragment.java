@@ -42,8 +42,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class OngoingFragment extends Fragment  {
-    private static final String TAG = OngoingFragment.class.getSimpleName();
+public class ReqFragment extends Fragment  {
+    private static final String TAG = ReqFragment.class.getSimpleName();
     public static final String TAG_PENDAFTARAN_ID = "pendaftaran_id";
     public static final String TAG_USER_ID         = "user_id";
     public static final String TAG_NAMA_FASKES       = "nama_faskes";
@@ -56,7 +56,7 @@ public class OngoingFragment extends Fragment  {
     private static final String TAG_MESSAGE = "message";
 
     private static String url_update 	     = Server.URL;
-    private static String url_select = Server.URL + "selectAntrianOngoing.php";
+    private static String url_select = Server.URL + "selectAntrianReq.php";
 
     RecyclerView rvAntrian;
     RecyclerView.Adapter mAdapter;
@@ -69,14 +69,13 @@ public class OngoingFragment extends Fragment  {
     String tag_json_obj = "json_obj_req";
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_ongoing, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_req, container, false);
         pd = new ProgressDialog(getContext());
         rvAntrian = (RecyclerView) rootView.findViewById(R.id.rv_antrian);
         mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mAdapter = new CardViewAntrianAdapter(getContext(), antrianDataArrayList);
         rvAntrian.setLayoutManager(new LinearLayoutManager(getContext()));
         rvAntrian.setAdapter(mAdapter);
-        loadjson();
         rvAntrian.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rvAntrian, new ClickListener() {
             @Override
             public void onPasienClick(View view, int position) {
@@ -89,10 +88,6 @@ public class OngoingFragment extends Fragment  {
             @Override
             public void onPasienLongClick(View view, int position) {
                 Toast.makeText(getActivity(),"nama"+antrianDataArrayList.get(position).getNama(),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), RekamMedisPasienActivity.class);
-                intent.putExtra("user_id", antrianDataArrayList.get(position).getUser_id());
-                intent.putExtra("pendaftaran_id", antrianDataArrayList.get(position).getPendaftaran_id());
-                startActivity(intent);
                 String user_id = antrianDataArrayList.get(position).getUser_id();
                 update(user_id);
                 Fragment fragment = new OngoingFragment();
@@ -102,12 +97,50 @@ public class OngoingFragment extends Fragment  {
                 transaction.addToBackStack(null);
 
                 transaction.commit();
-
             }
         }));
+        loadjson();
         return rootView;
     }
 
+//    private void loadjsonUpdate(String user_id){
+//        pd.setMessage("Mengambil Data");
+//        pd.setCancelable(false);
+//        pd.show();
+//
+//        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET, url_update+ "updateOngoing.php?user_id="+user_id, null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                pd.cancel();
+//                Log.d("volley", "response : " + response.toString());
+//                for (int i=0; i < response.length(); i++){
+//                    try {
+//                        JSONObject data = response.getJSONObject(i);
+//                        AntrianData md = new AntrianData();
+//                        md.setUser_id((data.getString(TAG_USER_ID)));
+//                        md.setNama(data.getString(TAG_NAMA)); // memanggil nama array yang kita buat
+//                        md.setFaskes(data.getString(TAG_NAMA_FASKES));
+//                        md.setCreated_at(data.getString(TAG_CREATED_AT));
+//                        md.setKeluhan(data.getString(TAG_KELUHAN));
+//                        md.setPhoto(data.getString(TAG_PHOTO));
+//
+//                        antrianDataArrayList.add(md);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        }, new Response.ErrorListener(){
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                pd.cancel();
+//                Log.d("volley", "error : " + error.getMessage());
+//            }
+//        });
+//        AppController.getInstance().addToRequestQueue(arrayRequest);
+//    }
     private void loadjson(){
         pd.setMessage("Mengambil Data");
         pd.setCancelable(false);
@@ -122,7 +155,6 @@ public class OngoingFragment extends Fragment  {
                     try {
                         JSONObject data = response.getJSONObject(i);
                         AntrianData md = new AntrianData();
-                        md.setPendaftaran_id(data.getString(TAG_PENDAFTARAN_ID));
                         md.setUser_id((data.getString(TAG_USER_ID)));
                         md.setNama(data.getString(TAG_NAMA)); // memanggil nama array yang kita buat
                         md.setFaskes(data.getString(TAG_NAMA_FASKES));
@@ -150,7 +182,7 @@ public class OngoingFragment extends Fragment  {
 
 
     private void update(final String user_id){
-        StringRequest strReq = new StringRequest(Request.Method.POST, url_update+ "updateDone.php?user_id="+user_id, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_update+ "updateOngoing.php?user_id="+user_id, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

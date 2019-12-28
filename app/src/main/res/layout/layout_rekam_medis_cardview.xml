@@ -14,13 +14,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="163dp"
         android:padding="8dp">
 
         <ImageView
             android:id="@+id/img_item_photo"
-            android:layout_width="150dp"
-            android:layout_height="220dp"
+            android:layout_width="158dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="4dp"
             android:scaleType="centerCrop"
             tools:src="@color/colorAccent" />
@@ -50,6 +50,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             tools:text="Tanggal" />
+
         <TextView
             android:id="@+id/tv_item_faskes"
             android:layout_width="match_parent"
@@ -68,7 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_item_faskes"
-            android:layout_above="@id/layout_button"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_item_photo"
@@ -76,32 +76,41 @@
             android:maxLines="5"
             tools:text="Keluhan" />
 
+        <TextView
+            android:id="@+id/tv_diagnosa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_keluhan"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/img_item_photo"
+            android:ellipsize="end"
+            android:maxLines="5"
+            tools:text="Diagnosa" />
+
+        <TextView
+            android:id="@+id/tv_anjuran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_diagnosa"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/img_item_photo"
+            android:ellipsize="end"
+            android:maxLines="5"
+            tools:text="anjuran" />
+
         <LinearLayout
             android:id="@+id/layout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="320dp"
             android:layout_toEndOf="@id/img_item_photo"
             android:orientation="horizontal">
 
-<!--            <Button-->
-<!--                android:id="@+id/btn_periksa"-->
-<!--                style="@style/Widget.AppCompat.Button.Colored"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Periksa"-->
-<!--                android:textSize="12sp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/btn_terima"-->
-<!--                style="@style/Widget.AppCompat.Button.Colored"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Terima"-->
-<!--                android:textSize="12sp" />-->
         </LinearLayout>
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

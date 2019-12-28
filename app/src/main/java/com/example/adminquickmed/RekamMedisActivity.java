@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.adminquickmed.RekamMedisPasienActivity.TAG_PENDAFTARAN_ID;
+
 public class RekamMedisActivity extends AppCompatActivity {
 
     Button buttonChoose;
@@ -44,19 +46,22 @@ public class RekamMedisActivity extends AppCompatActivity {
     Bitmap bitmap, decoded;
     int success;
     int PICK_IMAGE_REQUEST = 1;
+    String DetailApi;
     int bitmap_size = 60; // range 1 - 100
 
     private static final String TAG = RekamMedisActivity.class.getSimpleName();
 
     /* 10.0.2.2 adalah IP Address localhost Emulator Android Studio. Ganti IP Address tersebut dengan
     IP Address Laptop jika di RUN di HP/Genymotion. HP/Genymotion dan Laptop harus 1 jaringan! */
-    private String UPLOAD_URL = "https://quickmedapi.000webhostapp.com/uploadRekamMedis.php";
+    private String UPLOAD_URL = "https://quickmedapi.000webhostapp.com/";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    private String KEY_PENDAFTARAN_ID = "pendaftaran_id";
     private String KEY_IMAGE = "image";
     private String KEY_DIAGNOSA = "diagnosa";
     private String KEY_ANJURAN = "anjuran";
+
 
 
 
@@ -71,11 +76,9 @@ public class RekamMedisActivity extends AppCompatActivity {
 
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (FloatingActionButton) findViewById(R.id.buttonUpload);
-
         txt_diagnosa = (EditText) findViewById(R.id.et_diagnosa);
         txt_anjuran = (EditText) findViewById(R.id.et_anjuran);
         imageView = (ImageView) findViewById(R.id.imageView);
-
 
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +107,7 @@ public class RekamMedisActivity extends AppCompatActivity {
     private void uploadImage() {
         //menampilkan progress dialog
         final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL+"uploadRekamMedis.php",
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -145,13 +148,17 @@ public class RekamMedisActivity extends AppCompatActivity {
             }) {
             @Override
             protected Map<String, String> getParams() {
+                Intent intent = getIntent();
+                String pendaftaran_id = intent.getStringExtra("pendaftaran_id");
                 //membuat parameters
                 Map<String, String> params = new HashMap<String, String>();
 
                 //menambah parameter yang di kirim ke web servis
+                params.put(KEY_PENDAFTARAN_ID, pendaftaran_id);
                 params.put(KEY_IMAGE, getStringImage(decoded));
                 params.put(KEY_DIAGNOSA, txt_diagnosa.getText().toString().trim());
                 params.put(KEY_ANJURAN, txt_anjuran.getText().toString().trim());
+
 
                 //kembali ke parameters
                 Log.e(TAG, "" + params);

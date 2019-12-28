@@ -1,9 +1,9 @@
 package com.example.adminquickmed;
 
 
-import android.app.Application;
+
+
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +14,12 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.adminquickmed.app.AppController;
-import com.example.adminquickmed.data.AntrianData;
+import com.example.adminquickmed.data.RekamMedisData;
 import com.example.adminquickmed.util.Server;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,12 +34,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class DoneFragment extends Fragment  {
-    private static final String TAG = DoneFragment.class.getSimpleName();
+public class RekamMedisFragment extends Fragment  {
+    private static final String TAG = RekamMedisFragment.class.getSimpleName();
     public static final String TAG_PENDAFTARAN_ID = "pendaftaran_id";
     public static final String TAG_USER_ID         = "user_id";
     public static final String TAG_NAMA_FASKES       = "nama_faskes";
@@ -48,31 +49,37 @@ public class DoneFragment extends Fragment  {
     public static final String TAG_KELUHAN  = "keluhan";
     public static final String TAG_STATUS       = "status";
     public static final String TAG_PHOTO       = "photo";
+    public static final String TAG_DIAGNOSA       = "diagnosa";
+    public static final String TAG_ANJURAN       = "anjuran";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    private String user_id;
+    private  String pendaftaran_id;
 
-    private static String url_select 	 = Server.URL + "selectAntrianDone.php";
+
+
+    private static String url_select = Server.URL + "selectRekamMedisAll.php";
     private static String url_update 	     = Server.URL + "updateAntrian.php";
 
-    RecyclerView rvAntrian;
+    RecyclerView rvRekam;
+    String DetailApi;
+    FloatingActionButton fab;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
-    CardViewAntrianAdapter adapter;
-    ArrayList<AntrianData> antrianDataArrayList = new ArrayList<>();
+    CardViewRekamMedisAdapter adapter;
+    ArrayList<RekamMedisData> rekamDataArrayList = new ArrayList<>();
 
     int success;
     String tag_json_obj = "json_obj_req";
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_done, container, false);
-        pd = new ProgressDialog(getContext());
-        rvAntrian = (RecyclerView) rootView.findViewById(R.id.rv_antrian);
-        mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new CardViewAntrianAdapter((getContext()), antrianDataArrayList);
-        rvAntrian.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvAntrian.setAdapter(mAdapter);
-        loadjson();
+        View rootView = inflater.inflate(R.layout.fragment_rekam_medis, container, false);
+        pd = new ProgressDialog(getActivity());
+        rvRekam = (RecyclerView) rootView.findViewById(R.id.rv_rekam);
+        mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mAdapter = new CardViewRekamMedisAdapter(getActivity(), rekamDataArrayList);
+        rvRekam.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvRekam.setAdapter(mAdapter);
         return rootView;
     }
 
@@ -81,7 +88,7 @@ public class DoneFragment extends Fragment  {
         pd.setCancelable(false);
         pd.show();
 
-        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.POST, url_select, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET, url_select, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 pd.cancel();
@@ -89,14 +96,15 @@ public class DoneFragment extends Fragment  {
                 for (int i=0; i < response.length(); i++){
                     try {
                         JSONObject data = response.getJSONObject(i);
-                        AntrianData md = new AntrianData();
+                        RekamMedisData md = new RekamMedisData();
                         md.setNama(data.getString(TAG_NAMA)); // memanggil nama array yang kita buat
                         md.setFaskes(data.getString(TAG_NAMA_FASKES));
                         md.setCreated_at(data.getString(TAG_CREATED_AT));
                         md.setKeluhan(data.getString(TAG_KELUHAN));
                         md.setPhoto(data.getString(TAG_PHOTO));
-
-                        antrianDataArrayList.add(md);
+                        md.setDiagnosa(data.getString(TAG_DIAGNOSA));
+                        md.setAnjuran(data.getString(TAG_ANJURAN));
+                        rekamDataArrayList.add(md);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -115,7 +123,8 @@ public class DoneFragment extends Fragment  {
     }
 
     private void update(final String pendaftaran_idx){
-        StringRequest strReq = new StringRequest(Request.Method.POST, url_update, new Response.Listener<String>() {
+
+        StringRequest strReq = new StringRequest(Request.Method.GET, url_update, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -129,13 +138,8 @@ public class DoneFragment extends Fragment  {
                     if (success == 1) {
                         Log.d("get edit data", jObj.toString());
                         String pendaftaran_idx = jObj.getString(TAG_PENDAFTARAN_ID);
-                        String namax    = jObj.getString(TAG_NAMA);
-                        String created_atx  = jObj.getString(TAG_CREATED_AT);
                         String user_idx = jObj.getString(TAG_USER_ID);
-                        String statusx = jObj.getString(TAG_STATUS);
-                        String keluhanx = jObj.getString(TAG_KELUHAN);
-                        String nama_faskesx = jObj.getString(TAG_NAMA_FASKES);
-                        String photox = jObj.getString(TAG_PHOTO);
+
 
 
 //                        DialogForm(idx, namax, alamatx, createdx, user_idx, statusx, keluhanx, nama_faskesx,photox, "UPDATE");
@@ -143,7 +147,7 @@ public class DoneFragment extends Fragment  {
                         adapter.notifyDataSetChanged();
 
                     } else {
-                        Toast.makeText(getContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -156,7 +160,7 @@ public class DoneFragment extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -164,7 +168,8 @@ public class DoneFragment extends Fragment  {
             protected Map<String, String> getParams() {
                 // Posting parameters ke post url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("pendaftaran_id", pendaftaran_idx);
+                params.put("pendaftaran_id", TAG_PENDAFTARAN_ID);
+
                 return params;
             }
 
@@ -173,3 +178,4 @@ public class DoneFragment extends Fragment  {
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 }
+

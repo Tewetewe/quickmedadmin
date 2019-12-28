@@ -53,12 +53,27 @@
             app:layout_constraintTop_toTopOf="@+id/view4">
 
             <ImageView
-                android:id="@+id/pic_foto_register"
+                android:id="@+id/pic_foto"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:src="@drawable/icon_foto" />
 
         </com.github.florent37.shapeofview.shapes.CircleView>
+        <Button
+            android:id="@+id/btn_foto"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="55dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_btn_plus"
+            android:fontFamily="@font/mmedium"
+            android:text="+"
+            android:textColor="#FFF"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="@+id/view4"
+            app:layout_constraintStart_toStartOf="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
             android:id="@+id/textView4"
@@ -67,7 +82,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/mmedium"
             android:textAlignment="center"
-            android:text="Gusdek Lingga"
+            android:text="Anonim"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

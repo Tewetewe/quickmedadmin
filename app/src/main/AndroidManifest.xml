@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoginChatActivity"></activity>
+        <activity android:name=".RekamMedisAllActivity"></activity>
+        <activity android:name=".RekamMedisPasienActivity" />
+        <activity android:name=".LoginChatActivity" />
         <activity android:name=".SignupChatActivity" />
         <activity android:name=".SendNotifActivity" />
         <activity android:name=".PoliActivity" />
